@@ -9,7 +9,7 @@
 
     <div class="clock">
       <div class="clock-face">
-        <div class="hand hour-hand"></div>
+        <div class="hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
       </div>
@@ -62,13 +62,54 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin:100%; /*以哪裡為旋轉中心*/
+      transform: rotate(90deg); /*12點鐘方向為初始位置*/
+      transition: all 0.05s; /*transition-property:all, transition-duration:0.05s */
+      transition-timing-function: cubic-bezier(0.49, 2.35, 0.53, 1.37); /*每次指針移動的物理效果*/
     }
+
+    .hour-hand {
+    width: 35%;
+    height: 6px;
+    background: orange;
+    position: absolute;
+    top: 50%;
+    left: 55px;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.49, 2.35, 0.53, 1.37);
+  }
+
 
   </style>
 
   <script>
+  const secondHand = document.querySelector(".second-hand")
+  const minHand = document.querySelector(".min-hand")
+  const hourHand = document.querySelector(".hour-hand")
 
+    function setDate(){
+      const now = new Date();
+
+      const second = now.getSeconds();
+      const secondDegrees = ((second / 60) * 360) + 90;
+      secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+
+      const min = now.getMinutes();
+      const minDegrees = ((min / 60) * 360) + 90;
+      minHand.style.transform = `rotate(${minDegrees}deg)`;
+
+      const hour = now.getHours();
+      const hourDegrees = ((hour / 12) * 360) + 90 + (min/60 * 30);
+      hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+
+      console.log(second);
+    }
+
+    setInterval(setDate, 1000); //eloquent js p194
 
   </script>
+
 </body>
 </html>

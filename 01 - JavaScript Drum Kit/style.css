@@ -10,9 +10,9 @@ body,html {
 }
 
 .keys {
-  display: flex;
+  display: flex; /* flex 的寫法*/
   flex: 1;
-  min-height: 100vh;
+  min-height: 100vh; /* vh 是什麼*/
   align-items: center;
   justify-content: center;
 }
@@ -21,7 +21,7 @@ body,html {
   border: .4rem solid black;
   border-radius: .5rem;
   margin: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* rem 跟 em 有不同*/
   padding: 1rem .5rem;
   transition: all .07s ease;
   width: 10rem;
@@ -32,7 +32,7 @@ body,html {
 }
 
 .playing {
-  transform: scale(1.1);
+  transform: scale(1.5);
   border-color: #ffc600;
   box-shadow: 0 0 1rem #ffc600;
 }

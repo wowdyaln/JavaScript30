@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
 </head>
+
+
 <body>
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
@@ -12,7 +14,7 @@
     <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 
     <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <input id="blur" type="range" name="blur" min="0" max="25" value="5" data-sizing="px">
 
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
@@ -20,11 +22,20 @@
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
-  <style>
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+
+  <style>
+    :root {
+      --base: yellow;
+      --spacing: 10px;
+      --blur: 2px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
 
     body {
       text-align: center;
@@ -48,6 +59,19 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+
+    function handleUpdate(){
+      // console.log(this.value);
+      // console.log(this.dataset);
+      const suffix = this.dataset.sizing || ''; //像是 base color 就只有value 沒有 dataset sizing
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+
   </script>
 
 </body>

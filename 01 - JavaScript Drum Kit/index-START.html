@@ -86,7 +86,10 @@
   // }
 // 寫法2
 // 沒有 keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+var a = 123;
+
   function stopTransition(e){
+      // debugger;
       if (e.propertyName !== 'transform') return;
       e.target.classList.remove('playing');
     }
@@ -95,6 +98,7 @@
       const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
       if(!key) return;
       if (!audio) return;
+      // debugger
       key.addEventListener('transitionend', stopTransition);
       key.classList.add('playing');
       // jQuery 寫法： key.addClass
